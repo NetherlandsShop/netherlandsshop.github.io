@@ -36,10 +36,10 @@
 
         @keyframes blink {
             0%, 100% {
-                opacity: 1;
+                box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
             }
             50% {
-                opacity: 0;
+                box-shadow: none;
             }
         }
 
@@ -116,6 +116,7 @@
         .product-box:hover {
             transform: scale(1.05);
             box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+            animation-play-state: paused;
         }
 
         .product-box .emoji {
