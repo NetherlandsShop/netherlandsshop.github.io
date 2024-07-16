@@ -200,26 +200,30 @@
     <section class="intro">
         <p>Explore our wide range of products that can help boost the economy of Cliffcraft. Scroll down to see what we have in store!</p>
     </section>
-    <section class="products">
-        <div class="product-box" onclick="copyCode('1')">
+    <section class="products" id="productSection">
+        <div class="product-box" id="product1" onclick="copyCode('1')">
             <span class="emoji">🧱</span>
             <h2>1 Stack of Brick Blocks</h2>
             <p>Price: 250$</p>
+            <p id="product1Count">Clicks: 0</p>
         </div>
-        <div class="product-box" onclick="copyCode('2')">
+        <div class="product-box" id="product2" onclick="copyCode('2')">
             <span class="emoji">🍅🍑🍎</span>
             <h2>10 Tomatoes, Peaches, Pomegranates</h2>
             <p>Price: 50$</p>
+            <p id="product2Count">Clicks: 0</p>
         </div>
-        <div class="product-box" onclick="copyCode('3')">
+        <div class="product-box" id="product3" onclick="copyCode('3')">
             <span class="emoji">⛏️</span>
             <h2>Full Iron Armor</h2>
             <p>Price: 100$</p>
+            <p id="product3Count">Clicks: 0</p>
         </div>
-        <div class="product-box" onclick="copyCode('4')">
+        <div class="product-box" id="product4" onclick="copyCode('4')">
             <span class="emoji">🍞</span>
             <h2>1 Stack of Bread</h2>
             <p>Price: 100$</p>
+            <p id="product4Count">Clicks: 0</p>
         </div>
     </section>
 
@@ -232,21 +236,26 @@
     </div>
 
     <script>
-        // Function to copy code to clipboard
+        // Function to copy code to clipboard and update clicks
         function copyCode(code) {
             var codeText = '';
+            var modalText = 'Code copied to clipboard!';
             switch (code) {
                 case '1':
                     codeText = "CODE : 1";
+                    incrementClickCount('product1');
                     break;
                 case '2':
                     codeText = "CODE : 2";
+                    incrementClickCount('product2');
                     break;
                 case '3':
                     codeText = "CODE : 3";
+                    incrementClickCount('product3');
                     break;
                 case '4':
                     codeText = "CODE : 4";
+                    incrementClickCount('product4');
                     break;
                 default:
                     break;
@@ -271,10 +280,35 @@
                             modal.style.display = "none";
                         }
                     }
+
+                    // Update modal text
+                    document.getElementById("modalText").textContent = modalText;
                 })
                 .catch(function(err) {
                     console.error('Failed to copy: ', err);
                 });
+        }
+
+        // Function to increment click count for a product
+        function incrementClickCount(productId) {
+            var product = document.getElementById(productId);
+            var countElement = product.querySelector('p[id^="product"]');
+            var count = parseInt(countElement.textContent.split(': ')[1]);
+            count++;
+            countElement.textContent = 'Clicks: ' + count;
+
+            // Reorder products based on click counts
+            var productSection = document.getElementById('productSection');
+            var products = productSection.querySelectorAll('.product-box');
+            var sortedProducts = Array.from(products).sort((a, b) => {
+                var countA = parseInt(a.querySelector('p[id^="product"]').textContent.split(': ')[1]);
+                var countB = parseInt(b.querySelector('p[id^="product"]').textContent.split(': ')[1]);
+                return countB - countA; // Sort in descending order of clicks
+            });
+
+            // Remove existing products and append sorted products
+            products.forEach(product => productSection.removeChild(product));
+            sortedProducts.forEach(product => productSection.appendChild(product));
         }
     </script>
 </body>
