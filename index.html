@@ -153,6 +153,26 @@
             50% { opacity: 1; }
         }
 
+        .download-button {
+            display: block;
+            width: 200px;
+            margin: 2rem auto;
+            padding: 1rem 2rem;
+            background-color: var(--secondary-color);
+            color: var(--text-color);
+            text-align: center;
+            text-transform: uppercase;
+            font-weight: 600;
+            border-radius: 10px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+        }
+
+        .download-button:hover {
+            background-color: var(--primary-color);
+        }
+
         @media (max-width: 600px) {
             .products {
                 grid-template-columns: 1fr;
@@ -181,6 +201,9 @@
     <section class="products" id="productSection">
         <!-- Product boxes will be dynamically added here -->
     </section>
+
+    <!-- Download button section -->
+    <a href="https://github.com/NetherlandsShop/netherlandsshop.github.io/blob/main/shop_calculator.bat" class="download-button" download>Download Shop Calculator</a>
 
     <script>
         const products = [
