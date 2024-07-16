@@ -159,7 +159,7 @@
             margin: 2rem auto;
             padding: 1rem 2rem;
             background-color: var(--secondary-color);
-            color: var (--text-color);
+            color: var(--text-color);
             text-align: center;
             text-transform: uppercase;
             font-weight: 600;
@@ -215,7 +215,13 @@
             { id: 'product6', emoji: '🪵', name: '1 Stack of Oak Planks', price: 100 },
             { id: 'product7', emoji: '🦙', name: '2 Llamas', price: 500 },
             { id: 'product8', emoji: '🍈', name: '1 Stack of Melons', price: 80 },
-            { id: 'product9', emoji: '🔮', name: '16 XP Bottles', price: 150 }
+            { id: 'product9', emoji: '🔮', name: '16 XP Bottles', price: 150 },
+            { id: 'product10', emoji: '🌱', name: '1 Stack of Seeds', price: 100 },
+            { id: 'product11', emoji: '🌾', name: '1 Stack of Wheat', price: 100 },
+            { id: 'product12', emoji: '🦴', name: '1 Stack of Bonemeal', price: 600 },
+            { id: 'product13', emoji: '🪨', name: '1 Stack of Cobblestone', price: 100 },
+            { id: 'product14', emoji: '🟥', name: '1 Stack of Red Sand', price: 200 },
+            { id: 'product15', emoji: '🟥', name: '1 Stack of Red Sandstone', price: 200 }
         ];
 
         function createProductBox(product) {
@@ -238,8 +244,7 @@
         function copyCode(productId) {
             navigator.clipboard.writeText(`CODE : ${productId.slice(-1)}`)
                 .then(() => showPopup('Code copied to clipboard!'))
-                .catch(err => console.error('Failed to copy: ', err));
-
+                .catch(err => console.error('Error copying code: ', err));
             incrementClickCount(productId);
         }
 
