@@ -6,7 +6,7 @@ cls
 echo Netherlands Trading Shop Calculator
 echo ====================================
 
-set /p code=Enter the product code (1-6): 
+set /p code=Enter the product code (1-7): 
 
 if "%code%"=="1" (
     set "product=1 Stack of Brick Blocks"
@@ -32,6 +32,10 @@ if "%code%"=="1" (
     set "product=1 Stack of Oak Planks"
     set "price=100"
     set "quantity_factor=64"  REM Set the quantity factor for stacks
+) else if "%code%"=="7" (
+    set "product=2 Llamas"
+    set "price=500"
+    set "quantity_factor=2"   REM Set the quantity factor for llamas
 ) else (
     echo Invalid code. Please try again.
     pause
@@ -45,8 +49,8 @@ echo Price: $%price%
 set /p quantity=Enter the quantity: 
 
 REM Adjust total price based on quantity and quantity_factor
-if %quantity% equ 10 (
-    set /a total=%price%
+if %quantity% equ 1 (
+    set /a total=%price% / %quantity_factor%
 ) else (
     set /a total=%price% * %quantity% / %quantity_factor%
 )
