@@ -30,17 +30,27 @@
             padding: 2rem;
             text-align: center;
             position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .logo {
             position: absolute;
-            top: 1rem;
-            left: 1rem;
-            width: 50px;
-            height: 50px;
+            top: 50%;
+            left: 2rem;
+            transform: translateY(-50%);
+            width: 70px;
+            height: 70px;
             border-radius: 50%;
             overflow: hidden;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+            transition: all 0.3s ease;
+        }
+
+        .logo:hover {
+            transform: translateY(-50%) scale(1.1);
+            box-shadow: 0 0 30px rgba(255, 255, 255, 0.7);
         }
 
         h1 {
@@ -61,7 +71,7 @@
 
         .products {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
             gap: 2rem;
             padding: 2rem;
         }
@@ -69,13 +79,18 @@
         .product-box {
             background: var(--box-background);
             border-radius: 15px;
-            padding: 2rem;
+            padding: 1.5rem;
             text-align: center;
             transition: all 0.3s ease;
             backdrop-filter: blur(10px);
             color: var(--box-text-color);
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            height: auto;
+            min-height: 180px;
         }
 
         .product-box:hover {
@@ -84,31 +99,36 @@
         }
 
         .product-box .emoji {
-            font-size: 4rem;
-            margin-bottom: 1rem;
-        }
-
-        .product-box h2 {
-            font-size: 1.5rem;
-            font-weight: 600;
-            color: var(--secondary-color);
+            font-size: 3rem;
             margin-bottom: 0.5rem;
         }
 
+        .product-box h2 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--secondary-color);
+            margin: 0 0 0.5rem 0;
+            flex-grow: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
         .product-box p {
-            font-size: 1.1rem;
+            font-size: 1rem;
             color: var(--accent-color);
             font-weight: 500;
+            margin: 0;
         }
 
         .trending-label {
             position: absolute;
-            top: 1rem;
-            right: 1rem;
+            top: 0.5rem;
+            right: 0.5rem;
             background-color: var(--accent-color);
             color: var(--box-text-color);
-            padding: 0.5rem 1rem;
-            font-size: 0.8rem;
+            padding: 0.3rem 0.6rem;
+            font-size: 0.7rem;
             border-radius: 20px;
             text-transform: uppercase;
             font-weight: 600;
@@ -137,13 +157,21 @@
             .products {
                 grid-template-columns: 1fr;
             }
+            .logo {
+                position: static;
+                margin-bottom: 1rem;
+                transform: none;
+            }
+            header {
+                flex-direction: column;
+            }
         }
     </style>
 </head>
 <body>
     <header>
-        <a href="https://discord.gg/tGFbp4PG7U" target="_blank">
-            <img src="LOGO.PNG" alt="Netherlands Trading Shop Logo" class="logo">
+        <a href="https://discord.gg/tGFbp4PG7U" target="_blank" class="logo">
+            <img src="LOGO.PNG" alt="Netherlands Trading Shop Logo" width="70" height="70">
         </a>
         <h1>Netherlands Trading Shop</h1>
     </header>
@@ -159,14 +187,18 @@
             { id: 'product1', emoji: '🧱', name: '1 Stack of Brick Blocks', price: 250 },
             { id: 'product2', emoji: '🍅🍑🍎', name: '10 Tomatoes, Peaches, Pomegranates', price: 50 },
             { id: 'product3', emoji: '⛏️', name: 'Full Iron Armor', price: 100 },
-            { id: 'product4', emoji: '🍞', name: '1 Stack of Bread', price: 100 }
+            { id: 'product4', emoji: '🍞', name: '1 Stack of Bread', price: 100 },
+            { id: 'product5', emoji: '🏜️', name: '16 Soul Sand', price: 100 },
+            { id: 'product6', emoji: '🪵', name: '1 Stack of Oak Planks', price: 100 }
         ];
 
         function createProductBox(product) {
             return `
                 <div class="product-box" id="${product.id}" onclick="copyCode('${product.id}')">
-                    <span class="emoji">${product.emoji}</span>
-                    <h2>${product.name}</h2>
+                    <div>
+                        <span class="emoji">${product.emoji}</span>
+                        <h2>${product.name}</h2>
+                    </div>
                     <p>Price: $${product.price}</p>
                 </div>
             `;
