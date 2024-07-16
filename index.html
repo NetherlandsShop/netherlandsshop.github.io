@@ -4,189 +4,139 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Netherlands Trading Shop</title>
-    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --accent-color: #e74c3c;
+            --text-color: #ecf0f1;
+            --background-color: #34495e;
+            --box-background: rgba(255, 255, 255, 0.1);
+            --box-text-color: #ffffff;
+        }
+
         body {
-            background-color: #000;
-            color: #fff;
-            font-family: 'Helvetica Neue', Arial, sans-serif;
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-color);
             margin: 0;
             padding: 0;
             overflow-x: hidden;
         }
 
         header {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: linear-gradient(135deg, #111, #333);
-            padding: 20px;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            padding: 2rem;
+            text-align: center;
             position: relative;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
         }
 
         .logo {
             position: absolute;
-            top: 10px;
-            left: 10px;
+            top: 1rem;
+            left: 1rem;
             width: 50px;
             height: 50px;
-            animation: blink 1.5s infinite;
-        }
-
-        @keyframes blink {
-            0%, 100% {
-                box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
-            }
-            50% {
-                box-shadow: none;
-            }
+            border-radius: 50%;
+            overflow: hidden;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
         }
 
         h1 {
             margin: 0;
-            font-size: 3em;
-            font-weight: 300;
-            letter-spacing: 3px;
+            font-size: 2.5rem;
+            font-weight: 600;
+            letter-spacing: 2px;
             text-transform: uppercase;
-            color: #fff;
-            animation: fadeInDown 1s ease;
-        }
-
-        @keyframes fadeInDown {
-            from {
-                opacity: 0;
-                transform: translateY(-50px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
         }
 
         .intro {
-            background-color: #000;
-            color: #fff;
-            padding: 100px 20px;
+            padding: 4rem 2rem;
             text-align: center;
-            font-size: 1.2em;
-            line-height: 1.5;
-            animation: fadeIn 2s ease;
-        }
-
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-            }
-            to {
-                opacity: 1;
-            }
+            font-size: 1.2rem;
+            line-height: 1.6;
+            background-color: var(--primary-color);
         }
 
         .products {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            padding: 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            padding: 2rem;
         }
 
         .product-box {
-            background: rgba(34, 34, 34, 0.9);
-            border: 1px solid #444;
+            background: var(--box-background);
             border-radius: 15px;
-            margin: 15px;
-            padding: 20px;
-            width: 250px;
+            padding: 2rem;
             text-align: center;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            color: var(--box-text-color);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             position: relative;
-            overflow: hidden;
-            animation: float 2s infinite;
-            cursor: pointer;
-        }
-
-        @keyframes float {
-            0%, 100% {
-                transform: translateY(0);
-            }
-            50% {
-                transform: translateY(-10px);
-            }
         }
 
         .product-box:hover {
-            transform: scale(1.05);
-            box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
-            animation-play-state: paused;
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
         }
 
         .product-box .emoji {
-            font-size: 4em;
-            display: block;
-            margin-bottom: 15px;
-            transition: transform 0.3s ease;
-        }
-
-        .product-box:hover .emoji {
-            transform: rotate(20deg);
+            font-size: 4rem;
+            margin-bottom: 1rem;
         }
 
         .product-box h2 {
-            margin: 0 0 10px 0;
-            font-size: 1.5em;
-            font-weight: 400;
-            color: #ffab00;
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--secondary-color);
+            margin-bottom: 0.5rem;
         }
 
         .product-box p {
-            margin: 5px 0;
-            font-size: 1.1em;
+            font-size: 1.1rem;
+            color: var(--accent-color);
+            font-weight: 500;
+        }
+
+        .trending-label {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background-color: var(--accent-color);
+            color: var(--box-text-color);
+            padding: 0.5rem 1rem;
+            font-size: 0.8rem;
+            border-radius: 20px;
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+
+        .popup {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: var(--accent-color);
+            color: var(--box-text-color);
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-size: 1.2em;
+            z-index: 1000;
+            animation: fade-in-out 3s ease;
+        }
+
+        @keyframes fade-in-out {
+            0%, 100% { opacity: 0; }
+            50% { opacity: 1; }
         }
 
         @media (max-width: 600px) {
-            .product-box {
-                width: 90%;
+            .products {
+                grid-template-columns: 1fr;
             }
-        }
-
-        /* Modal Styling */
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 1;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            overflow: auto;
-            background-color: rgb(0,0,0);
-            background-color: rgba(0,0,0,0.4);
-            padding-top: 60px;
-        }
-
-        .modal-content {
-            background-color: #111;
-            margin: auto;
-            padding: 20px;
-            border: 1px solid #888;
-            width: 80%;
-            text-align: center;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-        }
-
-        .close {
-            color: #aaa;
-            float: right;
-            font-size: 28px;
-            font-weight: bold;
-        }
-
-        .close:hover,
-        .close:focus {
-            color: #fff;
-            text-decoration: none;
-            cursor: pointer;
         }
     </style>
 </head>
@@ -201,115 +151,80 @@
         <p>Explore our wide range of products that can help boost the economy of Cliffcraft. Scroll down to see what we have in store!</p>
     </section>
     <section class="products" id="productSection">
-        <div class="product-box" id="product1" onclick="copyCode('1')">
-            <span class="emoji">🧱</span>
-            <h2>1 Stack of Brick Blocks</h2>
-            <p>Price: 250$</p>
-            <p id="product1Count">Clicks: 0</p>
-        </div>
-        <div class="product-box" id="product2" onclick="copyCode('2')">
-            <span class="emoji">🍅🍑🍎</span>
-            <h2>10 Tomatoes, Peaches, Pomegranates</h2>
-            <p>Price: 50$</p>
-            <p id="product2Count">Clicks: 0</p>
-        </div>
-        <div class="product-box" id="product3" onclick="copyCode('3')">
-            <span class="emoji">⛏️</span>
-            <h2>Full Iron Armor</h2>
-            <p>Price: 100$</p>
-            <p id="product3Count">Clicks: 0</p>
-        </div>
-        <div class="product-box" id="product4" onclick="copyCode('4')">
-            <span class="emoji">🍞</span>
-            <h2>1 Stack of Bread</h2>
-            <p>Price: 100$</p>
-            <p id="product4Count">Clicks: 0</p>
-        </div>
+        <!-- Product boxes will be dynamically added here -->
     </section>
 
-    <!-- Modal -->
-    <div id="myModal" class="modal">
-        <div class="modal-content">
-            <span class="close">&times;</span>
-            <p id="modalText">Code copied to clipboard!</p>
-        </div>
-    </div>
-
     <script>
-        // Function to copy code to clipboard and update clicks
-        function copyCode(code) {
-            var codeText = '';
-            var modalText = 'Code copied to clipboard!';
-            switch (code) {
-                case '1':
-                    codeText = "CODE : 1";
-                    incrementClickCount('product1');
-                    break;
-                case '2':
-                    codeText = "CODE : 2";
-                    incrementClickCount('product2');
-                    break;
-                case '3':
-                    codeText = "CODE : 3";
-                    incrementClickCount('product3');
-                    break;
-                case '4':
-                    codeText = "CODE : 4";
-                    incrementClickCount('product4');
-                    break;
-                default:
-                    break;
-            }
+        const products = [
+            { id: 'product1', emoji: '🧱', name: '1 Stack of Brick Blocks', price: 250 },
+            { id: 'product2', emoji: '🍅🍑🍎', name: '10 Tomatoes, Peaches, Pomegranates', price: 50 },
+            { id: 'product3', emoji: '⛏️', name: 'Full Iron Armor', price: 100 },
+            { id: 'product4', emoji: '🍞', name: '1 Stack of Bread', price: 100 }
+        ];
 
-            // Copy code to clipboard
-            navigator.clipboard.writeText(codeText)
-                .then(function() {
-                    // Show modal when code is copied successfully
-                    var modal = document.getElementById("myModal");
-                    modal.style.display = "block";
-
-                    // Close modal when close button is clicked
-                    var span = document.getElementsByClassName("close")[0];
-                    span.onclick = function() {
-                        modal.style.display = "none";
-                    }
-
-                    // Close modal when clicking outside the modal content
-                    window.onclick = function(event) {
-                        if (event.target == modal) {
-                            modal.style.display = "none";
-                        }
-                    }
-
-                    // Update modal text
-                    document.getElementById("modalText").textContent = modalText;
-                })
-                .catch(function(err) {
-                    console.error('Failed to copy: ', err);
-                });
+        function createProductBox(product) {
+            return `
+                <div class="product-box" id="${product.id}" onclick="copyCode('${product.id}')">
+                    <span class="emoji">${product.emoji}</span>
+                    <h2>${product.name}</h2>
+                    <p>Price: $${product.price}</p>
+                </div>
+            `;
         }
 
-        // Function to increment click count for a product
+        function renderProducts() {
+            const productSection = document.getElementById('productSection');
+            productSection.innerHTML = products.map(createProductBox).join('');
+        }
+
+        function copyCode(productId) {
+            navigator.clipboard.writeText(`CODE : ${productId.slice(-1)}`)
+                .then(() => showPopup('Code copied to clipboard!'))
+                .catch(err => console.error('Failed to copy: ', err));
+
+            incrementClickCount(productId);
+        }
+
+        function showPopup(message) {
+            const popup = document.createElement('div');
+            popup.className = 'popup';
+            popup.textContent = message;
+            document.body.appendChild(popup);
+            setTimeout(() => popup.remove(), 3000);
+        }
+
         function incrementClickCount(productId) {
-            var product = document.getElementById(productId);
-            var countElement = product.querySelector('p[id^="product"]');
-            var count = parseInt(countElement.textContent.split(': ')[1]);
-            count++;
-            countElement.textContent = 'Clicks: ' + count;
-
-            // Reorder products based on click counts
-            var productSection = document.getElementById('productSection');
-            var products = productSection.querySelectorAll('.product-box');
-            var sortedProducts = Array.from(products).sort((a, b) => {
-                var countA = parseInt(a.querySelector('p[id^="product"]').textContent.split(': ')[1]);
-                var countB = parseInt(b.querySelector('p[id^="product"]').textContent.split(': ')[1]);
-                return countB - countA; // Sort in descending order of clicks
-            });
-
-            // Remove existing products and append sorted products
-            products.forEach(product => productSection.removeChild(product));
-            sortedProducts.forEach(product => productSection.appendChild(product));
+            let clickCounts = JSON.parse(localStorage.getItem('clickCounts')) || {};
+            clickCounts[productId] = (clickCounts[productId] || 0) + 1;
+            localStorage.setItem('clickCounts', JSON.stringify(clickCounts));
+            reorderProducts();
         }
+
+        function reorderProducts() {
+            const clickCounts = JSON.parse(localStorage.getItem('clickCounts')) || {};
+            products.sort((a, b) => (clickCounts[b.id] || 0) - (clickCounts[a.id] || 0));
+            renderProducts();
+            applyTrendingLabels();
+        }
+
+        function applyTrendingLabels() {
+            const productBoxes = document.querySelectorAll('.product-box');
+            productBoxes.forEach((box, index) => {
+                const label = box.querySelector('.trending-label');
+                if (label) label.remove();
+                if (index < 3) {
+                    const trendingLabel = document.createElement('div');
+                    trendingLabel.className = 'trending-label';
+                    trendingLabel.textContent = '🔥 Trending';
+                    box.appendChild(trendingLabel);
+                }
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            renderProducts();
+            reorderProducts();
+        });
     </script>
 </body>
 </html>
