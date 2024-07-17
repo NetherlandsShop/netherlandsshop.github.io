@@ -219,14 +219,14 @@
             { id: 'product10', emoji: '🌱', name: '1 Stack of Seeds', price: 100 },
             { id: 'product11', emoji: '🌾', name: '1 Stack of Wheat', price: 100 },
             { id: 'product12', emoji: '🦴', name: '1 Stack of Bonemeal', price: 600 },
-            { id: 'product13', emoji: '🪨', name: '1 Stack of Cobblestone', price: 100 },
-            { id: 'product14', emoji: '🟥', name: '1 Stack of Red Sand', price: 200 },
-            { id: 'product15', emoji: '🟥', name: '1 Stack of Red Sandstone', price: 200 }
+            { id: 'product13', emoji: '🧱', name: '1 Stack of Cobblestone', price: 100 },
+            { id: 'product14', emoji: '🏜️', name: '1 Stack of Red Sand', price: 200 },
+            { id: 'product15', emoji: '🏜️', name: '1 Stack of Red Sandstone', price: 200 }
         ];
 
         function createProductBox(product) {
             return `
-                <div class="product-box" id="${product.id}" onclick="copyCode('${product.id}')">
+                <div class="product-box" id="${product.id}" onclick="showQuantityPrompt('${product.id}')">
                     <div>
                         <span class="emoji">${product.emoji}</span>
                         <h2>${product.name}</h2>
@@ -241,11 +241,24 @@
             productSection.innerHTML = products.map(createProductBox).join('');
         }
 
-        function copyCode(productId) {
-            navigator.clipboard.writeText(`CODE : ${productId.slice(-1)}`)
-                .then(() => showPopup('Code copied to clipboard!'))
+        function showQuantityPrompt(productId) {
+            const quantity = prompt("Enter the quantity (1 stack = 64):");
+            if (quantity !== null && quantity.trim() !== "") {
+                const numericQuantity = parseInt(quantity.trim());
+                if (!isNaN(numericQuantity) && numericQuantity > 0) {
+                    const code = `${productId.slice(-1)}${numericQuantity}`;
+                    copyCode(code);
+                } else {
+                    showPopup('Please enter a valid positive number.');
+                }
+            }
+        }
+
+        function copyCode(code) {
+            navigator.clipboard.writeText(code)
+                .then(() => showPopup('Code copied to clipboard: ' + code))
                 .catch(err => console.error('Error copying code: ', err));
-            incrementClickCount(productId);
+            incrementClickCount(code.charAt(0));
         }
 
         function showPopup(message) {
@@ -258,7 +271,7 @@
 
         function incrementClickCount(productId) {
             let clickCounts = JSON.parse(localStorage.getItem('clickCounts')) || {};
-            clickCounts[productId] = (clickCounts[productId] || 0) + 1;
+            clickCounts[`product${productId}`] = (clickCounts[`product${productId}`] || 0) + 1;
             localStorage.setItem('clickCounts', JSON.stringify(clickCounts));
             reorderProducts();
         }
@@ -278,7 +291,7 @@
                 if (index < 3) {
                     const trendingLabel = document.createElement('div');
                     trendingLabel.className = 'trending-label';
-                    trendingLabel.textContent = '🔥 Trending';
+                    textContent = '🔥 Trending';
                     box.appendChild(trendingLabel);
                 }
             });
